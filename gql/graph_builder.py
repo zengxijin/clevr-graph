@@ -26,8 +26,8 @@ def cypherencode(v: NeoTypes):
 
 
 def ALL_PROPERTIES(entity: Dict[str, Any]) -> Dict[str, NeoTypes]:
-
-    return {k: cypherparse(v) for k, v in entity.items()}
+    print(type(entity))
+    return {k: cypherparse(v) for k, v in entity.stripped().items()}
 
 
 def CONST_LABEL(label: str) -> Callable[[Dict[str, Any]], List[str]]:

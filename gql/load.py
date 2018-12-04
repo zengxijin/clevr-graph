@@ -1,13 +1,12 @@
-
-
 import yaml
 from neo4j.exceptions import CypherError
 
-from .graph_builder import GraphBuilder
-from .gql_builder import GqlBuilder
+from gql.graph_builder import GraphBuilder
+from gql.gql_builder import GqlBuilder
 from neo4j.v1 import GraphDatabase
 
-def load_qas(qa_yaml="./data/test_qs.yaml"):
+
+def load_qas(qa_yaml="./data/gqa-r0.yaml"):
     with open(qa_yaml, "r") as file:
         for qa in yaml.load_all(file):
             yield qa
@@ -71,14 +70,14 @@ def answer_question(gqa):
         raise
 
 
-
 def nuke_neo(session):
     session.write_transaction(lambda tx: tx.run("MATCH ()-[r]-() delete r"))
     session.write_transaction(lambda tx: tx.run("MATCH (n) delete n"))
 
+
 if __name__ == "__main__":
 
-    url = "bolt://localhost:7687"
+    url = "bolt://192.168.56.101:7687"
     user = "neo4j"
     password = "clegr-secrets"
     insecure = True

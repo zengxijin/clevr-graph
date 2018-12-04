@@ -185,7 +185,8 @@ class GqlBuilder(object):
         raise NotImplementedError()
 
     def line_input_argument(self, input_arg):
-        if self.current_state > MATCH:            raise NotImplementedError()
+        if self.current_state > MATCH:
+            raise NotImplementedError()
 
         var = self.get_var()
         suquery = f"MATCH ({var}:LINE)"
@@ -221,7 +222,7 @@ class GqlBuilder(object):
         subquery = f"{a}.{unquote(prop)}"
         return self.do_match_to_with_transition(subquery) if self.current_state < WITH else subquery
 
-    def shortest_path(self, a: Var, b: Var, fallback):
+    def shortest_path(self, a: Var, b: Var, fallback=None):
         if self.current_state > MATCH:
             raise NotImplementedError()
 
